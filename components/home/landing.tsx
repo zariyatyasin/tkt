@@ -9,7 +9,7 @@ import { SearchIcon } from "lucide-react";
 
 export default function Landing() {
   return (
-    <div className="w-full min-h-screen bg-[url('/chef.png')] bg-cover bg-center bg-no-repeat">
+    <div className="w-full min-h-[70vh] bg-[url('/chef.png')] bg-cover bg-center bg-no-repeat">
       <div className="container px-4 md:px-6 py-12 md:py-24 lg:py-32 flex flex-col items-center justify-center h-full">
         <div className="max-w-2xl text-center space-y-4">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-primary ">
