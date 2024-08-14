@@ -17,7 +17,8 @@ export default function Landing() {
           </h1>
           <p className=" text-gray-900 md:text-xl">
             Discover talented local chefs and book them for your next gathering,
-            whether it's a private dinner, corporate event, or special occasion.
+            whether it&apos;s a private dinner, corporate event, or special
+            occasion.
           </p>
           <form className="flex items-center w-full max-w-xl">
             <div className="relative flex-1">
