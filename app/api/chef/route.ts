@@ -11,8 +11,9 @@ export const GET = async () => {
 
   try {
      
- 
-    return new NextResponse(JSON.stringify("users"), { status: 200 });
+    const allChef = await Chef.find().lean();
+    
+    return new NextResponse(JSON.stringify({data:allChef}), { status: 200 });
   } catch (error: any) {
     return new NextResponse("Error in fetching users" + error.message, {
       status: 500,

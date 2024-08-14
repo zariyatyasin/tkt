@@ -243,7 +243,7 @@ export default function Navbar() {
         </div> */}
         <div className="f ">
           <Link
-            href="#"
+            href="/"
             className="flex items-center justify-center space-x-2 md:justify-start"
             prefetch={false}
           >

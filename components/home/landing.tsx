@@ -1,11 +1,6 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/yzjEqRA6Hyf
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { SearchIcon } from "lucide-react";
+import { SearchIcon, ShoppingCartIcon } from "lucide-react";
 
 export default function Landing() {
   return (
@@ -38,5 +33,109 @@ export default function Landing() {
         </div>
       </div>
     </div>
+
+    // <div className=" ">
+    //   <div className=" h-screen ">
+    //     {/* <header className="flex items-center justify-between p-4 border-b">
+    //       <div className="flex items-center space-x-4">
+    //         <h1 className="text-xl font-bold">RUSHIT</h1>
+    //         <div className="relative">
+    //           <input
+    //             type="search"
+    //             placeholder="Search..."
+    //             className="pl-8 pr-4 py-2 border rounded-full"
+    //           />
+    //           <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+    //         </div>
+    //       </div>
+    //       <nav className="flex space-x-6">
+    //         <a href="#" className="text-lg">
+    //           Menu
+    //         </a>
+    //         <a href="#" className="text-lg">
+    //           Stock
+    //         </a>
+    //         <a href="#" className="text-lg">
+    //           Category
+    //         </a>
+    //         <a href="#" className="text-lg">
+    //           About Us
+    //         </a>
+    //       </nav>
+    //       <button className="bg-black text-white px-4 py-2 rounded-full">
+    //         Login/Signup
+    //       </button>
+    //     </header> */}
+    //     <main className="grid grid-cols-1 gap-4 p-8 md:grid-cols-2">
+    //       <div className="bg-[#5b3cc4] p-8 rounded-lg text-white relative">
+    //         <h2 className="text-6xl font-bold mb-4">FOOD MOOD</h2>
+    //         <div className="absolute top-1/2 left-4 transform -translate-y-1/2 space-y-4">
+    //           <img
+    //             src="/placeholder.svg"
+    //             alt="Pizza"
+    //             className="w-12 h-12 rounded-full"
+    //             width="50"
+    //             height="50"
+    //             style={{ aspectRatio: "50/50", objectFit: "cover" }}
+    //           />
+    //           <img
+    //             src="/placeholder.svg"
+    //             alt="Hotdog"
+    //             className="w-12 h-12 rounded-full"
+    //             width="50"
+    //             height="50"
+    //             style={{ aspectRatio: "50/50", objectFit: "cover" }}
+    //           />
+    //         </div>
+    //         <img
+    //           src="/placeholder.svg"
+    //           alt="Character holding pizza"
+    //           className="absolute bottom-0 right-0 w-64 h-64"
+    //           width="300"
+    //           height="300"
+    //           style={{ aspectRatio: "300/300", objectFit: "cover" }}
+    //         />
+    //         <button className="bg-green-500 text-black px-6 py-3 rounded-full mt-8">
+    //           Order Now
+    //         </button>
+    //       </div>
+    //       <div className="space-y-4">
+    //         <div className="bg-[#f5f5f5] p-8 rounded-lg">
+    //           <h3 className="text-3xl font-bold mb-2">
+    //             <span className="text-orange-500">Download</span> Our App &
+    //             Enjoy <span className="text-orange-500">Tasty</span> Food
+    //           </h3>
+    //           <p className="text-gray-700 mb-4">
+    //             Place an order for food in our application and couriers will
+    //             bring it to you in 25 minutes
+    //           </p>
+    //           <button className="bg-orange-500 text-white px-6 py-3 rounded-full">
+    //             Download now
+    //           </button>
+    //         </div>
+    //         <div className="bg-[#f5f5f5] p-8 rounded-lg flex items-center">
+    //           <img
+    //             src="/placeholder.svg"
+    //             alt="Hamburger"
+    //             className="w-24 h-24 mr-4"
+    //             width="100"
+    //             height="100"
+    //             style={{ aspectRatio: "100/100", objectFit: "cover" }}
+    //           />
+    //           <div>
+    //             <h3 className="text-2xl font-bold mb-2">Buy 2 Get 1 free</h3>
+    //             <p className="text-orange-500">Hamburger</p>
+    //           </div>
+    //           <div className="ml-auto text-center">
+    //             <div className="bg-black text-white p-4 rounded-full">
+    //               <span className="text-2xl font-bold">$28</span>
+    //             </div>
+    //             <ShoppingCartIcon className="mt-2 h-6 w-6 text-black" />
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </main>
+    //   </div>
+    // </div>
   );
 }
