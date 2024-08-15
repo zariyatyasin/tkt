@@ -16,6 +16,8 @@ const menuItemSchema = new Schema<IMenuItem>(
     name: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
+
+    
   },
   { _id: false }
 );

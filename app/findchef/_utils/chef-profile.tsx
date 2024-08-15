@@ -8,7 +8,7 @@ export function ChefProfile() {
         alt="Chef"
         width={150}
         height={150}
-        className="rounded-full"
+        className="rounded-md"
         style={{ aspectRatio: "100/100", objectFit: "cover" }}
       />
       <div>
