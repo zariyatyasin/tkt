@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import React from "react";
 
 interface ChefCardProps {
@@ -7,7 +8,7 @@ interface ChefCardProps {
   id: string;
 }
 
-export default function ChefCard({ name, cuisines }: ChefCardProps) {
+export default function ChefCard({ name, cuisines, id }: ChefCardProps) {
   return (
     <div className="bg-background rounded-xl overflow-hidden shadow-lg">
       <div className="relative">
@@ -27,7 +28,10 @@ export default function ChefCard({ name, cuisines }: ChefCardProps) {
         <h3 className="text-xl font-bold">{name}</h3>
         <p className="text-muted-foreground">{cuisines.join(", ")}</p>
         <div className="flex items-center justify-between">
-          <Button size="sm">Book Now</Button>
+          <Link href={`findchef/${id}`}>
+            {" "}
+            <Button size="sm">Book Now</Button>
+          </Link>
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ import { BookingDetails } from "../_utils/booking-confirm";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { CalendarIcon, TagIcon, XIcon } from "lucide-react";
+import KnowTheChef from "../_utils/know-the-chef";
 
 interface MenuItem {
   id: number;
@@ -33,7 +34,7 @@ interface BookingDetails {
 
 export default function Page() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const handleImageClick = (image: string) => {
     setSelectedImage(image);
     setIsModalOpen(true);
@@ -127,6 +128,14 @@ export default function Page() {
 
     console.log(requestData);
   };
+  const galleryImages = [
+    "/chef.png",
+    "/chef.png",
+    "/chef.png",
+    "/chef.png",
+    "/chef.png",
+    "/chef.png",
+  ];
   return (
     <div className="container  py-10">
       <div className=" relative grid    md:grid-cols-12 gap-12 md:gap-16 max-w-6xl mx-auto justify-between ">
@@ -140,108 +149,15 @@ export default function Page() {
               selectedItems={selectedItems}
               handleAddToBooking={handleAddToBooking}
             />
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto py-24  ">
-              <div className=" gap-4">
-                <h2 className="text-3xl font-bold">
-                  Discover the Beauty of Nature
-                </h2>
-                <p className="text-muted-foreground">
-                  Immerse yourself in the captivating landscapes and vibrant
-                  colors of our
-                </p>
-                <div className="grid gap-2">
-                  <div className="flex items-center gap-2">
-                    <CalendarIcon className="w-5 h-5 text-muted-foreground" />
-                    <span className="text-muted-foreground">
-                      August 15, 2024
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <TagIcon className="w-5 h-5 text-muted-foreground" />
-                    <span className="text-muted-foreground">
-                      Nature, Photography
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="grid gap-4">
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  <img
-                    src="/chef.png"
-                    alt="Gallery Image 1"
-                    width="300"
-                    height="300"
-                    className="rounded-lg object-cover aspect-square cursor-pointer hover:opacity-80 transition-opacity"
-                    onClick={() =>
-                      handleImageClick("/chef.png?height=300&width=300")
-                    }
-                  />
-                  <img
-                    src="/chef.png"
-                    alt="Gallery Image 2"
-                    width="300"
-                    height="300"
-                    className="rounded-lg object-cover aspect-square cursor-pointer hover:opacity-80 transition-opacity"
-                    onClick={() =>
-                      handleImageClick("/chef.png?height=300&width=300")
-                    }
-                  />
-                  <img
-                    src="/chef.png"
-                    alt="Gallery Image 3"
-                    width="300"
-                    height="300"
-                    className="rounded-lg object-cover aspect-square cursor-pointer hover:opacity-80 transition-opacity"
-                    onClick={() =>
-                      handleImageClick("/chef.png?height=300&width=300")
-                    }
-                  />
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
-                  <img
-                    src="/chef.png"
-                    alt="Gallery Image 4"
-                    width="300"
-                    height="300"
-                    className="rounded-lg object-cover aspect-square cursor-pointer hover:opacity-80 transition-opacity"
-                    onClick={() =>
-                      handleImageClick("/chef.png?height=300&width=300")
-                    }
-                  />
-                  <img
-                    src="/chef.png"
-                    alt="Gallery Image 5"
-                    width="300"
-                    height="300"
-                    className="rounded-lg object-cover aspect-square cursor-pointer hover:opacity-80 transition-opacity"
-                    onClick={() =>
-                      handleImageClick("/chef.png?height=300&width=300")
-                    }
-                  />
-                </div>
-              </div>
 
-              {isModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-                  <div className="max-w-5xl mx-auto">
-                    <img
-                      src="/chef.png"
-                      alt="Gallery Image"
-                      width={1200}
-                      height={800}
-                      className="rounded-lg object-contain max-h-[90vh]"
-                      style={{ aspectRatio: "1200/800", objectFit: "cover" }}
-                    />
-                    <button
-                      className="absolute top-4 right-4 text-white bg-gray-800 hover:bg-gray-700 rounded-full p-2 focus:outline-none"
-                      onClick={handleModalClose}
-                    >
-                      <XIcon className="h-6 w-6" />
-                    </button>
-                  </div>
-                </div>
-              )}
-            </section>
+            {/* image Gallery  */}
+            <KnowTheChef
+              images={galleryImages}
+              onImageClick={handleImageClick}
+              isModalOpen={isModalOpen}
+              selectedImage={selectedImage}
+              onModalClose={handleModalClose}
+            />
           </div>
         </div>
         <div

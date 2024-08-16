@@ -62,8 +62,8 @@ export function Menu({ menu, selectedItems, handleAddToBooking }: MenuProps) {
               style={{ aspectRatio: "100/100", objectFit: "cover" }}
             />
             <div className="flex-1 p-2">
-              <h3 className=" text-base md:text-lg font-bold">{item.name}</h3>
-              <p className="text-muted-foreground text-sm md:text-base">
+              <h3 className=" text-sm md:text-lg font-bold">{item.name}</h3>
+              <p className="text-muted-foreground text-xs md:text-base">
                 {item.description}
               </p>
               {/* <Button variant="ghost" size="icon" onClick={() => openDrawer()}>
@@ -97,13 +97,13 @@ export function Menu({ menu, selectedItems, handleAddToBooking }: MenuProps) {
             {isDesktop ? (
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button
+                  {/* <Button
                     variant="ghost"
                     size="icon"
                     className=" border rounded-full"
                   >
                     <UtensilsIcon className="h-4 w-4" />
-                  </Button>
+                  </Button> */}
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
                   <DialogHeader>
@@ -129,7 +129,7 @@ export function Menu({ menu, selectedItems, handleAddToBooking }: MenuProps) {
               </Dialog>
             ) : (
               <Drawer>
-                <DrawerTrigger asChild>
+                {/* <DrawerTrigger asChild>
                   <Button
                     variant="ghost"
                     size="icon"
@@ -137,7 +137,7 @@ export function Menu({ menu, selectedItems, handleAddToBooking }: MenuProps) {
                   >
                     <UtensilsIcon className="h-4 w-4" />
                   </Button>
-                </DrawerTrigger>
+                </DrawerTrigger> */}
                 <DrawerContent>
                   <DrawerHeader>
                     <DrawerTitle>Ingredients</DrawerTitle>

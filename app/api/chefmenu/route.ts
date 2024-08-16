@@ -17,22 +17,33 @@ export const POST = async (request: Request) => {
     // Create a new ChefMenu document using the request body
     const newChefMenu = new ChefMenu({
       chef: body.chef, // Reference to the Chef
-      menuItems: body.menuItems, // Array of menu items
+      name: body.name, // Name of the menu item
+      description: body.description, // Description of the menu item
+      price: body.price, // Price of the menu item
+      ingredients: body.ingredients, // Array of ingredients
+      category: body.category, // Category of the menu item
     });
 
     // Save the ChefMenu to the database
     const savedChefMenu = await newChefMenu.save();
 
     // Return a success response with the saved chef menu data
-    return new NextResponse(JSON.stringify(savedChefMenu), { status: 201 });
-  } catch (error: any) {
-    // Handle any errors and return an error response
-    return new NextResponse("Error creating chef menu: " + error.message, {
-      status: 500,
-    });
+    return new NextResponse(
+      JSON.stringify({
+        message: "Chef menu created successfully",
+        data: savedChefMenu,
+      }),
+      { status: 201 }
+    );  } catch (error: any) {
+     return new NextResponse(
+      JSON.stringify({
+        message: "Error creating chef menu",
+        error: error.message,
+      }),
+      { status: 500 }
+    );
   }
 };
- 
 export const GET = async (request: Request) => {
     // Connect to the database
     await connect();
@@ -51,4 +62,3 @@ export const GET = async (request: Request) => {
     }
   };
   
- 
