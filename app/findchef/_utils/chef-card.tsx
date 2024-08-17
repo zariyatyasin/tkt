@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { ChefHat } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -34,9 +35,12 @@ export default function ChefCard({
         <h3 className="text-xl font-bold">{name}</h3>
         <p className="text-muted-foreground">{cuisines.join(", ")}</p>
         <div className="flex items-center justify-between">
-          <Link href={`findchef/${id}`}>
-            {" "}
-            <Button size="sm">Book Now</Button>
+          <Link href={"/findchef/" + name + "?_id=" + id}>
+            <Button size="sm">
+              {" "}
+              <ChefHat className=" h-4 w-4" />
+              Book Now
+            </Button>
           </Link>
         </div>
       </div>

@@ -1,8 +1,9 @@
-import connect from "@/utils/db";
+ 
 import { NextResponse } from "next/server";
  
  
 import Chef from "@/model/chef";
+import connect from "@/utils/db";
 
 export const PATCH = async (request: Request, { params }: { params: { id: string } }) => {
     await connect();

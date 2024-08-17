@@ -32,7 +32,9 @@ interface BookingDetails {
   time: string;
 }
 
-export default function Page() {
+export default function Page({ searchParams }: { searchParams: any }) {
+  console.log(searchParams._id);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const handleImageClick = (image: string) => {

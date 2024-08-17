@@ -21,7 +21,8 @@ export const POST = async (request: Request) => {
       description: body.description, // Description of the menu item
       price: body.price, // Price of the menu item
       ingredients: body.ingredients, // Array of ingredients
-      category: body.category, // Category of the menu item
+      category: body.category,
+      menuImage:body.menuImage // Category of the menu item
     });
 
     // Save the ChefMenu to the database
