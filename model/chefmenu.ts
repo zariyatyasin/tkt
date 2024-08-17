@@ -26,3 +26,5 @@ const chefMenuSchema = new Schema<IChefMenu>(
 const ChefMenu = models.ChefMenu || model("ChefMenu", chefMenuSchema);
 
 export default ChefMenu;
+
+

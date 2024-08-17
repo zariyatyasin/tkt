@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea"; // Assuming you have a Text
 import { Button } from "@/components/ui/button";
 
 interface BookingDetailsForm {
+  name: string;
   address: string;
   phone: string;
   email: string;
@@ -17,9 +18,13 @@ interface BookingDetailsForm {
 
 interface BookingDetailsProps {
   onSubmit: (data: BookingDetailsForm) => void;
+  isSubmitting: boolean;
 }
 
-export function BookingDetails({ onSubmit }: BookingDetailsProps) {
+export function BookingDetails({
+  onSubmit,
+  isSubmitting,
+}: BookingDetailsProps) {
   const {
     control,
     handleSubmit,
@@ -41,15 +46,28 @@ export function BookingDetails({ onSubmit }: BookingDetailsProps) {
           className="grid gap-4"
         >
           <div className="grid gap-2">
+            <Label htmlFor="name">Name</Label>
+            <Controller
+              name="name"
+              control={control}
+              rules={{ required: "name is required" }}
+              render={({ field }) => <Input id="name" {...field} />}
+            />
+            {errors.name && (
+              <span className="text-red-500 text-sm">
+                {errors.name.message}
+              </span>
+            )}
+          </div>
+          <div className="grid gap-2">
             <Label htmlFor="address">Address</Label>
             <Controller
               name="address"
               control={control}
-              rules={{ required: "Address is required" }}
               render={({ field }) => <Input id="address" {...field} />}
             />
             {errors.address && (
-              <span className=" text-red-500 text-sm">
+              <span className="text-red-500 text-sm">
                 {errors.address.message}
               </span>
             )}
@@ -63,7 +81,7 @@ export function BookingDetails({ onSubmit }: BookingDetailsProps) {
               render={({ field }) => <Input id="phone" {...field} />}
             />
             {errors.phone && (
-              <span className=" text-red-500 text-sm">
+              <span className="text-red-500 text-sm">
                 {errors.phone.message}
               </span>
             )}
@@ -85,7 +103,7 @@ export function BookingDetails({ onSubmit }: BookingDetailsProps) {
               )}
             />
             {errors.email && (
-              <span className=" text-red-500 text-sm">
+              <span className="text-red-500 text-sm">
                 {errors.email.message}
               </span>
             )}
@@ -102,7 +120,7 @@ export function BookingDetails({ onSubmit }: BookingDetailsProps) {
                 )}
               />
               {errors.date && (
-                <span className=" text-red-500 text-sm">
+                <span className="text-red-500 text-sm">
                   {errors.date.message}
                 </span>
               )}
@@ -118,7 +136,7 @@ export function BookingDetails({ onSubmit }: BookingDetailsProps) {
                 )}
               />
               {errors.time && (
-                <span className=" text-red-500 text-sm">
+                <span className="text-red-500 text-sm">
                   {errors.time.message}
                 </span>
               )}
@@ -138,14 +156,12 @@ export function BookingDetails({ onSubmit }: BookingDetailsProps) {
               )}
             />
           </div>
-          <Button className=" w-full hidden md:flex" type="submit">
-            Book now
+          <Button className="w-full md:hidden mt-4" type="submit">
+            {isSubmitting ? "Booking..." : " Book Now"}
           </Button>
-          <div className=" z-50 p-1 flex items-center  md:hidden   fixed bottom-0 left-0 w-full bg-white   justify-between  l   border-y-2  border-gray-200 border-2">
-            <Button className=" w-full" type="submit">
-              Book now
-            </Button>
-          </div>
+          <Button className="w-full hidden md:flex mt-4" type="submit">
+            {isSubmitting ? "Booking..." : " Book Now"}
+          </Button>
         </form>
       </CardContent>
     </Card>

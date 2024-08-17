@@ -4,7 +4,7 @@ import ChefCard from "./_utils/chef-card";
 export default async function Page() {
   const result = await GetAllChef();
 
-  if (result?.data.length < 0) {
+  if (result?.data?.length < 0) {
     return (
       <div className="text-center text-xl text-red-500 mt-10">
         No Data Found!

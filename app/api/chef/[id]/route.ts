@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
  
 import Chef from "@/model/chef";
 import connect from "@/utils/db";
+import ChefMenu from "@/model/chefmenu";
 
 export const PATCH = async (request: Request, { params }: { params: { id: string } }) => {
     await connect();
@@ -74,32 +75,40 @@ export const PATCH = async (request: Request, { params }: { params: { id: string
   };
 
 
-  export const GET = async (request: Request,{ params }: { params: { id: string } }) => {
+  export const GET = async (request: Request, { params }: { params: { id: string } }) => {
     await connect();
   
     try {
-        const { id } = params;  // Assuming you pass the ID as a URL parameter
+        const { id } = params;  // Extract `id` from `params`
   
-      const GetChef = await Chef.findById(id).populate('chef');
-  
-      if (!GetChef) {
-        return new NextResponse("Chef item not found", { status: 404 });
-      }
-  
-      return new NextResponse(
-        JSON.stringify({
-          message: "Chef successfully Updated",
-          data: GetChef,
-        }),
-        { status: 201 }
-      );     } catch (error: any) {
+        // Fetch the chef's details by ID
+        const GetChef = await Chef.findById(id);
+
+        // Fetch all menus associated with the chef by ID
+        const menus = await ChefMenu.find({ chef: id });
+
+        
+        if (!GetChef) {
+            return new NextResponse("Chef not found", { status: 404 });
+        }
+
+        // Return the chef's details along with their menus
         return new NextResponse(
             JSON.stringify({
-              message: "Error creating chef Chef",
-              error: error.message,
+                message: "Chef successfully retrieved",
+                chef: GetChef,
+                menus: menus,
+            }),
+            { status: 200 }
+        );
+    } catch (error: any) {
+        return new NextResponse(
+            JSON.stringify({
+                message: "Error retrieving chef",
+                error: error.message,
             }),
             { status: 500 }
-          );
+        );
     }
-  };
+};
   

@@ -39,7 +39,7 @@ const KnowTheChef: React.FC<KnowTheChefProps> = ({
       </div>
       <div className="grid gap-4">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {images.slice(0, 6).map((src, index) => (
+          {images?.slice(0, 6).map((src, index) => (
             <img
               key={index}
               src={src}

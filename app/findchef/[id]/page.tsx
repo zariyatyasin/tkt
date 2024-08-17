@@ -1,42 +1,55 @@
 "use client";
 
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 import React from "react";
-
 import { ChefProfile } from "../_utils/chef-profile";
 import { Menu } from "../_utils/menu-list";
 import { BookingSummary } from "../_utils/booking-summary";
 import { BookingDetails } from "../_utils/booking-confirm";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { CalendarIcon, TagIcon, XIcon } from "lucide-react";
-import KnowTheChef from "../_utils/know-the-chef";
 
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import KnowTheChef from "../_utils/know-the-chef";
+import { createOrder, GetSingleChef } from "../_utils/action";
+import { useRouter } from "next/navigation";
+// MenuItem interface now includes ingredients
 interface MenuItem {
-  id: number;
+  id: string; // Ensure 'id' is of type 'string'
   name: string;
   description: string;
   price: number;
+  ingredients: string[];
+  menuImage: string;
 }
 
-interface SelectedItem extends MenuItem {
+interface SelectedItem {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
   quantity: number;
 }
 
 interface BookingDetails {
+  name: string;
   address: string;
   phone: string;
   email: string;
   date: string;
   time: string;
+  notes?: string;
 }
 
 export default function Page({ searchParams }: { searchParams: any }) {
-  console.log(searchParams._id);
-
+  const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([]);
+  const [chefData, setChefData] = useState<any>(null);
+  const [menu, setMenu] = useState<MenuItem[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
   const handleImageClick = (image: string) => {
     setSelectedImage(image);
     setIsModalOpen(true);
@@ -45,45 +58,6 @@ export default function Page({ searchParams }: { searchParams: any }) {
     setIsModalOpen(false);
     setSelectedImage(null);
   };
-  const menu: MenuItem[] = [
-    {
-      id: 1,
-      name: "Grilled Salmon with Lemon Dill Sauce",
-      description:
-        "Fresh Atlantic salmon fillet grilled to perfection, served with a creamy lemon dill sauce.",
-      price: 35.99,
-    },
-    {
-      id: 2,
-      name: "Beef Tenderloin Filet Mignon",
-      description:
-        "Juicy and tender beef tenderloin filet, pan-seared and finished in the oven.",
-      price: 49.99,
-    },
-    {
-      id: 3,
-      name: "Roasted Vegetable Lasagna",
-      description:
-        "Layers of fresh vegetables, creamy béchamel, and melted cheese, baked to perfection.",
-      price: 28.99,
-    },
-    {
-      id: 4,
-      name: "Herb-Crusted Rack of Lamb",
-      description:
-        "Succulent rack of lamb coated in a flavorful herb crust, served with a red wine reduction.",
-      price: 42.99,
-    },
-    {
-      id: 5,
-      name: "Seared Scallops with Pea Puree",
-      description:
-        "Perfectly seared sea scallops served on a bed of creamy pea puree, garnished with crispy prosciutto.",
-      price: 38.99,
-    },
-  ];
-
-  const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([]);
 
   const handleAddToBooking = (item: MenuItem, quantity: number) => {
     setSelectedItems((prevItems) => {
@@ -111,67 +85,155 @@ export default function Page({ searchParams }: { searchParams: any }) {
     (total, item) => total + item.price * item.quantity,
     0
   );
+
   const handleBookingSubmit = async (details: BookingDetails) => {
     if (selectedItems.length === 0) {
       alert("Please select at least one item before booking.");
       return;
     }
+    setIsSubmitting(true); // Start loading
+
     const requestData = {
+      name: details.name,
       address: details.address,
       phone: details.phone,
       email: details.email,
       date: details.date,
       time: details.time,
       items: selectedItems,
+      notes: details.notes,
       totalCost,
-      chefName: "Yasin",
-      chefId: 3434,
+      chefName: chefData.name,
+      chefId: chefData._id,
     };
 
     console.log(requestData);
+
+    try {
+      const res = await createOrder(requestData);
+
+      if (res.status === 201) {
+        // Assuming a successful response, redirect to a success page
+        router.push("/booking-confirm/" + res?.data?._id); // Replace '/success' with your target page route
+      }
+    } catch (error) {
+      console.error("Booking submission failed:", error);
+      alert("An error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false); // End loading
+    }
   };
-  const galleryImages = [
-    "/chef.png",
-    "/chef.png",
-    "/chef.png",
-    "/chef.png",
-    "/chef.png",
-    "/chef.png",
-  ];
+
+  const fetchChef = async () => {
+    try {
+      if (searchParams?._id) {
+        const result = await GetSingleChef(searchParams?._id);
+        setChefData(result.chef);
+        setMenu(
+          result.menus.map((menu: any) => ({
+            id: menu._id,
+            name: menu.name,
+            description: menu.description,
+            price: menu.price,
+            ingredients: menu.ingredients,
+            menuImage: menu.menuImage,
+          }))
+        );
+      }
+    } catch (error) {
+      setError("Failed to load chef data. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchChef();
+  }, []);
+
   return (
-    <div className="container  py-10">
-      <div className=" relative grid    md:grid-cols-12 gap-12 md:gap-16 max-w-6xl mx-auto justify-between ">
-        <div className=" col-span-1 md:col-span-7 flex flex-col gap-6">
+    <div className="container py-10">
+      <div className="relative grid md:grid-cols-12 gap-12 md:gap-16 max-w-6xl mx-auto justify-between">
+        <div className="col-span-1 md:col-span-7 flex flex-col gap-6">
           <div className="">
-            <ChefProfile />
+            {isLoading ? (
+              <div className="flex md:flex-row items-center space-x-4 flex-col space-y-4 d">
+                <Skeleton className="h-[150px] w-[150px] rounded-md" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-[250px]" />
+                  <Skeleton className="h-4 w-[200px]" />
+                </div>
+              </div>
+            ) : (
+              <ChefProfile chef={chefData} />
+            )}
           </div>
           <div className="grid gap-4">
-            <Menu
-              menu={menu}
-              selectedItems={selectedItems}
-              handleAddToBooking={handleAddToBooking}
-            />
+            <h2 className="text-xl font-bold">Menu</h2>
+            {isLoading ? (
+              <div className=" space-y-4">
+                <div className="flex md:flex-row items-center space-x-4 flex-col space-y-4  ">
+                  <Skeleton className="h-[150px] w-[150px] rounded-md" />
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                  </div>
+                </div>
+                <div className="flex md:flex-row items-center space-x-4 flex-col space-y-4  ">
+                  <Skeleton className="h-[150px] w-[150px] rounded-md" />
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                  </div>
+                </div>
+                <div className="flex md:flex-row items-center space-x-4 flex-col space-y-4  ">
+                  <Skeleton className="h-[150px] w-[150px] rounded-md" />
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                  </div>
+                </div>
+                <div className="flex md:flex-row items-center space-x-4 flex-col space-y-4  ">
+                  <Skeleton className="h-[150px] w-[150px] rounded-md" />
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                  </div>
+                </div>
+              </div>
+            ) : menu.length === 0 ? (
+              <div>No items</div>
+            ) : (
+              <Menu
+                menu={menu}
+                selectedItems={selectedItems}
+                handleAddToBooking={handleAddToBooking}
+              />
+            )}
 
-            {/* image Gallery  */}
-            <KnowTheChef
-              images={galleryImages}
-              onImageClick={handleImageClick}
-              isModalOpen={isModalOpen}
-              selectedImage={selectedImage}
-              onModalClose={handleModalClose}
-            />
+            {/* Image Gallery */}
+            {chefData && (
+              <KnowTheChef
+                images={chefData.images.map((img: any) => img.url)}
+                onImageClick={handleImageClick}
+                isModalOpen={isModalOpen}
+                selectedImage={selectedImage}
+                onModalClose={handleModalClose}
+              />
+            )}
           </div>
         </div>
-        <div
-          className=" col-span-1 md:col-span-5
-         flex flex-col   gap-6  "
-        >
+        <div className="col-span-1 md:col-span-5 flex flex-col gap-6">
           <BookingSummary
             selectedItems={selectedItems}
             totalCost={totalCost}
+            // @ts-ignore
             handleRemoveFromBooking={handleRemoveFromBooking}
           />
-          <BookingDetails onSubmit={handleBookingSubmit} />
+          <BookingDetails
+            onSubmit={handleBookingSubmit}
+            isSubmitting={isSubmitting}
+          />
         </div>
       </div>
     </div>

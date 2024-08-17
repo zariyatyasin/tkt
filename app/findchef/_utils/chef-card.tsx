@@ -20,7 +20,10 @@ export default function ChefCard({
     <div className="bg-background rounded-xl overflow-hidden shadow-lg">
       <div className="relative">
         <img
-          src={profileImage}
+          src={
+            profileImage ||
+            "https://res.cloudinary.com/ddrjnijut/image/upload/v1723878189/chef_wkroiu.png"
+          }
           width={400}
           height={300}
           alt="Chef Profile"

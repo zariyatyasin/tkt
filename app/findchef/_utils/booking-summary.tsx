@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { Trash, TrashIcon, XIcon } from "lucide-react";
 
 interface SelectedItem {
-  id: number;
+  id: string;
   name: string;
   description: string;
   price: number;
