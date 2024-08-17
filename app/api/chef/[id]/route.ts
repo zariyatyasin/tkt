@@ -2,7 +2,7 @@ import connect from "@/utils/db";
 import { NextResponse } from "next/server";
  
  
-import ChefMenu from "@/model/chefmenu";
+import Chef from "@/model/chef";
 
 export const PATCH = async (request: Request, { params }: { params: { id: string } }) => {
     await connect();
@@ -11,7 +11,7 @@ export const PATCH = async (request: Request, { params }: { params: { id: string
       const { id } = params; // Extract `id` from `params`
       const body = await request.json();
   
-      const updatedChefMenu = await ChefMenu.findByIdAndUpdate(
+      const updatedChef = await Chef.findByIdAndUpdate(
         id,
         {
           $set: body,
@@ -19,21 +19,21 @@ export const PATCH = async (request: Request, { params }: { params: { id: string
         { new: true } // Return the updated document
       );
   
-      if (!updatedChefMenu) {
-        return new NextResponse("Menu item not found", { status: 404 });
+      if (!updatedChef) {
+        return new NextResponse("Chef item not found", { status: 404 });
       }
   
       return new NextResponse(
         JSON.stringify({
-          message: "Menu successfully Updated",
-          data: updatedChefMenu,
+          message: "Chef successfully Updated",
+          data: updatedChef,
         }),
         { status: 201 }
       ); 
     } catch (error: any) {
         return new NextResponse(
             JSON.stringify({
-              message: "Error creating chef menu",
+              message: "Error creating chef Chef",
               error: error.message,
             }),
             { status: 500 }
@@ -48,15 +48,15 @@ export const PATCH = async (request: Request, { params }: { params: { id: string
     try {
         const { id } = params;  // Assuming you pass the ID as a URL parameter
   
-      const deletedChefMenu = await ChefMenu.findByIdAndDelete(id);
+      const deletedChef = await Chef.findByIdAndDelete(id);
   
-      if (!deletedChefMenu) {
-        return new NextResponse("Menu item not found", { status: 404 });
+      if (!deletedChef) {
+        return new NextResponse("Chef item not found", { status: 404 });
       }
   
       return new NextResponse(
         JSON.stringify({
-          message: "Menu successfully Updated",
+          message: "Chef successfully Updated",
         
         }),
         { status: 201 }
@@ -64,7 +64,7 @@ export const PATCH = async (request: Request, { params }: { params: { id: string
     } catch (error: any) {
         return new NextResponse(
             JSON.stringify({
-              message: "Error creating chef menu",
+              message: "Error creating chef Chef",
               error: error.message,
             }),
             { status: 500 }
@@ -79,22 +79,22 @@ export const PATCH = async (request: Request, { params }: { params: { id: string
     try {
         const { id } = params;  // Assuming you pass the ID as a URL parameter
   
-      const chefMenu = await ChefMenu.findById(id).populate('chef');
+      const GetChef = await Chef.findById(id).populate('chef');
   
-      if (!chefMenu) {
-        return new NextResponse("Menu item not found", { status: 404 });
+      if (!GetChef) {
+        return new NextResponse("Chef item not found", { status: 404 });
       }
   
       return new NextResponse(
         JSON.stringify({
-          message: "Menu successfully Updated",
-          data: chefMenu,
+          message: "Chef successfully Updated",
+          data: GetChef,
         }),
         { status: 201 }
       );     } catch (error: any) {
         return new NextResponse(
             JSON.stringify({
-              message: "Error creating chef menu",
+              message: "Error creating chef Chef",
               error: error.message,
             }),
             { status: 500 }

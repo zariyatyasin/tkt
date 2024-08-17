@@ -6,14 +6,20 @@ interface ChefCardProps {
   name: string;
   cuisines: string[];
   id: string;
+  profileImage: string;
 }
 
-export default function ChefCard({ name, cuisines, id }: ChefCardProps) {
+export default function ChefCard({
+  name,
+  cuisines,
+  id,
+  profileImage,
+}: ChefCardProps) {
   return (
     <div className="bg-background rounded-xl overflow-hidden shadow-lg">
       <div className="relative">
         <img
-          src="/chef.png"
+          src={profileImage}
           width={400}
           height={300}
           alt="Chef Profile"

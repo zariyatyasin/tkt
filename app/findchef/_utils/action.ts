@@ -10,7 +10,7 @@ export const GetAllChef = async () => {
 
     const result = await response.json();
 
-    console.log(result);
+  
 
     return result;
   } catch (error) {

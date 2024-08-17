@@ -36,10 +36,12 @@ export const POST = async (request: Request) => {
       experience: body.experience,
       cuisines: body.cuisines,
       location: body.location,
+      description:body.description,
       contact: {
         phone: body.contact.phone,
         email: body.contact.email,
       },
+      images:body.images,
       menus: body.menus,
     });
 

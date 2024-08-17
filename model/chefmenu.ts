@@ -6,13 +6,15 @@ interface IChefMenu {
   description: string;
   price: number;
   ingredients: string[]; // Array of ingredients as strings
-  category: string; // Category of the dish
+  category: string;
+  menuImage:string // Category of the dish
 }
 
 const chefMenuSchema = new Schema<IChefMenu>(
   {
     chef: { type: Schema.Types.ObjectId, ref: "Chef", required: true },
     name: { type: String, required: true },
+    menuImage: { type: String, default: null },
     description: { type: String, required: true },
     price: { type: Number, required: true },
     ingredients: { type: [String],  }, // Array of strings for ingredients
