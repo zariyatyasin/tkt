@@ -12,10 +12,9 @@ export default async function Page({ params }: { params: any }) {
       </div>
     );
   }
-  console.log(result);
 
   return (
-    <div className="w-full min-h-screen text-gray-950 flex flex-col items-center justify-center">
+    <div className="w-full min-h-screen text-gray-950 flex flex-col  py-16 items-center justify-center">
       <div className="w-full max-w-3xl mx-auto rounded-xl overflow-hidden">
         <div className="p-8 flex flex-col items-start justify-center gap-4">
           <Link href="/" className="w-full  flex items-center gap-2">

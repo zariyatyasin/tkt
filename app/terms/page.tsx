@@ -424,7 +424,6 @@ export default function page() {
           privacy practices, please contact us at tkteats@hotmail.com.
         </p>
       </div>
-      <Footer />
     </div>
   );
 }

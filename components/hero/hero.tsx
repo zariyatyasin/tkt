@@ -39,8 +39,8 @@ export default function Hero() {
           className="flex flex-col justify-center space-y-4"
         >
           <div className="space-y-2">
-            <h1 className="text-3xl  font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-              DINE LUXURIOUSLY, YOUR WAY
+            <h1 className="text-3xl leading-relaxed font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+              DINE LUXURIOUSLY YOUR WAY
             </h1>
             <p className="max-w-[600px] font-bold text-muted-foreground md:text-2xl">
               <span className=" text-primary "> Affordable</span> private dining
@@ -50,7 +50,7 @@ export default function Hero() {
           <div className="flex flex-col gap-2 min-[400px]:flex-row">
             <Link
               href="/findchef"
-              className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+              className="inline-flex h-10 font-bold  items-center justify-center rounded-md bg-primary px-8 text-sm  text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
               prefetch={false}
             >
               Find Chef

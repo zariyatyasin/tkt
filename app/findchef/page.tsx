@@ -13,12 +13,12 @@ export default async function Page() {
   }
 
   return (
-    <div className="flex flex-col min-h-dvh">
-      <section className="bg-[#f5f5f5] py-12 md:py-20 lg:py-24">
+    <div className="flex flex-col min-h-dvh  4">
+      <section className="bg-[#f5f5f5] pb-8 pt-28  ">
         <div className="container px-4 md:px-6">
           <div className="max-w-3xl mx-auto text-center space-y-4">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Find the Perfect Chef for Your Event
+              Top chefs in your area
             </h1>
             <p className="text-muted-foreground md:text-xl">
               Browse our curated selection of top-rated chefs and book your next

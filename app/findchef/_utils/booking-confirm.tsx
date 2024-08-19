@@ -156,9 +156,12 @@ export function BookingDetails({
               )}
             />
           </div>
-          <Button className="w-full md:hidden mt-4" type="submit">
-            {isSubmitting ? "Booking..." : " Book Now"}
-          </Button>
+          <div className=" z-50  p-2 flex items-center  md:hidden   fixed bottom-0 left-0 w-full bg-white   justify-between  l   border-y-2  border-gray-200 border-2">
+            <Button size={"sm"} className=" w-full md:hidden " type="submit">
+              {isSubmitting ? "Booking..." : " Book Now"}
+            </Button>
+          </div>
+
           <Button className="w-full hidden md:flex mt-4" type="submit">
             {isSubmitting ? "Booking..." : " Book Now"}
           </Button>

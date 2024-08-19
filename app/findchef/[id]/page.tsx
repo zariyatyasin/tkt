@@ -6,8 +6,8 @@ import { ChefProfile } from "../_utils/chef-profile";
 import { Menu } from "../_utils/menu-list";
 import { BookingSummary } from "../_utils/booking-summary";
 import { BookingDetails } from "../_utils/booking-confirm";
+import { useToast } from "@/components/ui/use-toast";
 
-import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import KnowTheChef from "../_utils/know-the-chef";
 import { createOrder, GetSingleChef } from "../_utils/action";
@@ -50,6 +50,8 @@ export default function Page({ searchParams }: { searchParams: any }) {
   const [menu, setMenu] = useState<MenuItem[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  const { toast } = useToast();
+
   const handleImageClick = (image: string) => {
     setSelectedImage(image);
     setIsModalOpen(true);
@@ -88,7 +90,11 @@ export default function Page({ searchParams }: { searchParams: any }) {
 
   const handleBookingSubmit = async (details: BookingDetails) => {
     if (selectedItems.length === 0) {
-      alert("Please select at least one item before booking.");
+      toast({
+        title: "Booking Error",
+        description: "Please select at least one item before booking.",
+      });
+
       return;
     }
     setIsSubmitting(true); // Start loading
@@ -120,6 +126,11 @@ export default function Page({ searchParams }: { searchParams: any }) {
       console.error("Booking submission failed:", error);
       alert("An error occurred. Please try again.");
     } finally {
+      toast({
+        title: "Booking Confirmed",
+        description: "The chef has been successfully booked.",
+      });
+
       setIsSubmitting(false); // End loading
     }
   };
@@ -152,7 +163,7 @@ export default function Page({ searchParams }: { searchParams: any }) {
   }, []);
 
   return (
-    <div className="container py-10">
+    <div className="container py-28">
       <div className="relative grid md:grid-cols-12 gap-12 md:gap-16 max-w-6xl mx-auto justify-between">
         <div className="col-span-1 md:col-span-7 flex flex-col gap-6">
           <div className="">

@@ -30,9 +30,9 @@ export default function ChefCard({
           className="w-full h-48 object-cover"
           style={{ aspectRatio: "400/300", objectFit: "cover" }}
         />
-        <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">
+        {/* <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">
           5.0
-        </div>
+        </div> */}
       </div>
       <div className="p-4 space-y-2">
         <h3 className="text-xl font-bold">{name}</h3>
