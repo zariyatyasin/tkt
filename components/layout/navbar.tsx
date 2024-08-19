@@ -250,7 +250,7 @@ export default function Navbar() {
             <Image
               alt="logo"
               className=" h-8 w-8"
-              src={"/logo1.png"}
+              src="/logo.webp"
               height={1000}
               width={1000}
             />

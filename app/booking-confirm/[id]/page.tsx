@@ -18,7 +18,7 @@ export default async function Page({ params }: { params: any }) {
     <div className="w-full min-h-screen text-gray-950 flex flex-col items-center justify-center">
       <div className="w-full max-w-3xl mx-auto rounded-xl overflow-hidden">
         <div className="p-8 flex flex-col items-start justify-center gap-4">
-          <Link href="/" className="w-full bg-gray-50 flex items-center gap-2">
+          <Link href="/" className="w-full  flex items-center gap-2">
             <Home className="h-4 w-4" /> <div className="text-sm">Home</div>
           </Link>
           <div className="text-gray-950 text-4xl font-bold">
@@ -69,7 +69,7 @@ export default async function Page({ params }: { params: any }) {
           <div className="bg-gray-100 rounded-lg p-4 w-full">
             <div className="text-gray-950 font-bold">Need Help?</div>
             <div className="text-gray-950 text-lg">
-              Call our support line at +1 (555) 123-4567
+              Call our support line at +1 (509) 992-8838
             </div>
           </div>
           <Link href="/" className="w-full">
